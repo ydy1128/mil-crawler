@@ -3,16 +3,18 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from os import walk
 from copy import deepcopy
+
 class Crawler():
     def __init__(self, base_url, sub_urls = []):
         self._base_url = base_url
-        self._driver = webdriver.Chrome('crawl/chromedriver')
+        self._driver = webdriver.Chrome('chromedriver')
         self.sub_urls = deepcopy(sub_urls)
         self.x_paths = {}
         self._html = None
         self._paths = None
 
         self._driver.implicitly_wait(3)
+        self.get_url(0)
     
     def get_url(self, sub_url_index=0):
         if sub_url_index >= len(self.sub_urls):
